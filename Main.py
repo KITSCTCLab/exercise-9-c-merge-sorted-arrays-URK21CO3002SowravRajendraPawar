@@ -1,38 +1,43 @@
 from typing import List
 
 def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-  # Write code here
-  array = [0 for i in range(m + n)]
-    i = 0
-    j = 0
-    k = 0
-    while i < m and j < n:
-        if nums1[i] <= nums2[j]:
-            array[k] = nums1[i]
-            i += 1
-        else:
-            array[k] = nums2[j]
-            j += 1
-        k += 1
-    if i >= m:
-        while j < n:
-            array[k] = nums2[j]
-            j += 1
-            k += 1
+  #Function implementing merging of two sorted arrays
+  #Input: nums1 -> array
+  #       m -> number of elements of nums1
+  #       nums2 -> array
+  #       n -> number of elements of nums2
+  l1 = nums1[:]
+  l2 = nums2[:]
+  curr, i, j = 0, 0, 0
+  while i < m and j < n:
+    if l1[i] < l2[j]:
+      nums1[curr] = l1[i]
+      i += 1
     else:
-        while i < m:
-            array[k] = nums1[i]
-            i += 1
-            k += 1
-    for i in range(len(array)):
-      nums1[i] = array[i]
+      nums1[curr] = l2[j]
+      j += 1
+    curr += 1
+  while i < m:
+    nums1[curr] = l1[i]
+    curr += 1
+    i += 1
+  while j < n:
+    nums1[curr] = l2[j]
+    curr += 1
+    j += 1
 
-# Do not change the following code
+
+# Do noT change the following code
 nums1 = []
 nums2 = []
 for item in input().split(', '):
   nums1.append(int(item))
 for item in input().split(', '):
+  nums2.append(int(item))
+m = int(input())
+n = int(input())
+merge(nums1, m, nums2, n)
+print(nums1)
   nums2.append(int(item))
 m = int(input())
 n = int(input())
